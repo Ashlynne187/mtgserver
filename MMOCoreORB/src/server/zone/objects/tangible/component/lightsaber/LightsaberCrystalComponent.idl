@@ -8,6 +8,8 @@ import server.zone.objects.tangible.component.Component;
 import server.zone.packets.scene.AttributeListMessage;
 include server.zone.packets.object.ObjectMenuResponse;
 include server.zone.objects.creature.CreatureObject;
+include templates.tangible.LightsaberCrystalObjectTemplate;
+include templates.SharedObjectTemplate;
 import server.zone.objects.tangible.TangibleObject;
 
 include server.zone.objects.manufactureschematic.craftingvalues.CraftingValues;
@@ -23,6 +25,7 @@ class LightsaberCrystalComponent extends Component {
 	public final static int PREMIUM = 5;
 	public final static int FLAWLESS = 6;
 
+	protected transient LightsaberCrystalObjectTemplate lcoTemplate;
 	protected int damage;
 	protected int color;
 	protected int quality;
@@ -70,6 +73,16 @@ class LightsaberCrystalComponent extends Component {
 
 	public native void initializeTransientMembers();
 
+		/**
+	 * Reads and sets the template data from a SharedTangibleObjectTemplate LuaObject
+	 * @pre { templateData is a valid pointer }
+	 * @post { TangibleObject members are initialized }
+	 * @param templateData templateData points to the SharedTangibleObjectTemplate LuaObject that is used to initialize the TangibleObject members
+	 */
+
+	@local
+	public native void loadTemplateData(SharedObjectTemplate templateData);
+
 	public native void notifyLoadFromDatabase();
 
 	@local
@@ -98,8 +111,7 @@ class LightsaberCrystalComponent extends Component {
 
 	public native int inflictDamage(TangibleObject attacker, int damageType, float damage, boolean destroy, boolean notifyClient = true);
 
-	public native void generateCrystalStats();
-	public native void validateCrystalStats();
+
 	public native int getRandomizedStat(int min, int max, int itemLevel);
 	public native float getRandomizedStat(float min, float max, int itemLevel);
 	public native int getCrystalQuality();

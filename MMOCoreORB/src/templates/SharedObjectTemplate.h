@@ -167,6 +167,7 @@ public:
 	const static int LIVESAMPLE = 0x4000031;
 	const static int CREATUREHABITAT = 0x4000032;
 	const static int REPAIRTOOL = 0x4000033;
+	const static int LIGHTSABERCRYSTAL = 0x4000035;
 	const static int SHIPCHASSIS = 0x4000036;
 	const static int SHIPDEED = 0x4000037;
 	const static int RECYCLETOOL = 0x4000038;
@@ -690,6 +691,10 @@ public:
 	}
 
 	virtual bool isRepairToolTemplate() const {
+		return false;
+	}
+	
+	virtual bool isLightsaberCrystalTemplate() {
 		return false;
 	}
 

@@ -159,18 +159,11 @@ bool LootManagerImplementation::loadConfigData() {
 	loadLootableMods( &modsTable, &lootableHeavyWeaponMods );
 
 	LuaObject luaObject = lua->getGlobalObject("jediCrystalStats");
-	LuaObject crystalTable = luaObject.getObjectField("lightsaber_module_force_crystal");
+	LuaObject crystalTable = luaObject.getObjectField("lightsaber_module_krayt_dragon_pearl");
 	CrystalData* crystal = new CrystalData();
-	crystal->readObject(&crystalTable);
-	crystalData.put("lightsaber_module_force_crystal", crystal);
-	crystalTable.pop();
-
-	crystalTable = luaObject.getObjectField("lightsaber_module_krayt_dragon_pearl");
-	crystal = new CrystalData();
 	crystal->readObject(&crystalTable);
 	crystalData.put("lightsaber_module_krayt_dragon_pearl", crystal);
 	crystalTable.pop();
-	luaObject.pop();
 
 	delete lua;
 
@@ -365,7 +358,7 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 
 		craftingValues->setCurrentPercentage(subtitle, percentage);
 
-		if (subtitle == "maxrange" || subtitle == "midrange" || subtitle == "zerorangemod" || subtitle == "maxrangemod" || subtitle == "forcecost") {
+		if (subtitle == "maxrange" || subtitle == "midrange" || subtitle == "zerorangemod" || subtitle == "maxrangemod" || subtitle == "forcecost" || subtitle == "color") {
 			continue;
 		}
 
